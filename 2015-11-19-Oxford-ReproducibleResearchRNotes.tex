@@ -1,0 +1,62 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage[latin1]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+
+\begin{document}
+
+\tableofcontents
+
+\newpage
+\section{intro}
+
+\section{reproducibility of research}
+
+OK, so first of all I want to make it clear what I mean by reproducibility. In particular in relation to replicability of research. The thing is that both these terms are very often used interchangeably and that can sometimes lead to confusion. So here's the way I will use them here. 
+
+We generally understand replication and reproducibility to be the golden standard of scientific research. Here's a definition I like "The confirmation of results and conclusions from one study obtained independently in another". This is from the editorial to a special issue of Science dedicated to "Data replicability and reproducibility". 
+
+Here's another good one from the same issue, which is even more condensed: "[T]he independent verification of prior findings", although they are talking about reproducibility here. 
+
+This of course goes back to Karl Popper and the Logic of scientific discovery and the concept of falsifiability. But I'm not going to get into the philosophy of science aspect here, all I want to do is make it clear what I'm going to talk about and so here's my definition of both terms:
+
+When I talk of replication, I mean it in the broad sense relating to findings and conclusions. And within that there are several ways or levels of replication.
+You can reask the question from scratch and attempt to confirm a finding or conclusion with a whole new experiment. You can redo an experiment - trying to follow the original methods as closely as possible. You can reanalyse the data from an experiment - using different methods, models what have you. And finally you can reproduce an analysis - using the same data, same methods and techniques. 
+
+So it's essentially only the last type of replication that I'm talking about here. Sometimes these are also called "pure replications" or "close replications", but whatever you want to call them, that is what I'm talking about. 
+
+So what I want to talk about are some simple and accessible tools and techniques and rules to follow to ensure that your work is reproducible in this sense. All of it actually also applies to level three here - that's essentially only a requirement to have open data access. Which is a slightly different issue if only because there might be confidentiality issues, but generally that's more straightforward. 
+
+
+\section{Show your work}
+So the sort of reproducibility that I'm talking about is about ``showing your work''. And yes, that can sometimes be the most annoying thing in the world. As in this example here, where a user on imgur vented his annoyance at his maths teacher who wanted him to show his work by taking it to a really extreme conclusion. I'm not sure if you can see this very well, this starts with ``Neurons travel through synapses, finger muscles move to grasp writing utensil'' and this whole page is just to describe the work that went into writing his name on the homework. And apparently this is followed by 44 more pages like this one. 
+
+So obviously this is a bit of an extreme example, but my point is that honestly yes, ensuring your analysis is really reproducible can be quite annoying, and it can seem pointless and unnecessary.  BUT it is worth the hassle in the end. And it will be less of a hassle if you plan systematically on doing it from the start instead of thinking about it retrospecively and trying to fix it after the fact. And furthermore that doing truly reproducible data analysis has become easier and easier with a variety of tools not only being available, but being accessible, free and relatively easy to use. 
+
+\section{RStudio}
+OK, so I won't overdo it with trying to sell R as a data analysis tool. I think that's wat I put down under intended audience anyway, right, you have to think R is the best one ever? Right? So if you're here I'll assume you are already sold. But just in case, here is a chart from a recent survey of data scientists, I believe 1,200 of them were involved in this survey, and here are the proportions that use each of these programmes as their primary modelling and analytics tool. Now bear in mind these are data scientists, so if we look at academics more generally the picture is a bit different. These are from Google Scholar - the numbers of articles using each particular software tool, these are for 2014 which is the last complete year, and you can see that SPSS is still firmly in the lead, with R just trailing behind SAS in second place. 
+
+But I think a massive part of this rise, that is also one that I think is set to continue, is the development of RStudio launched in 2011, which has quickly become the most popular IDE for R. Integrated Development Environment. And if it is not the most popular it is definitely the one with the highest rise in popularity. And with very good reason, not only did it fill a massive niche in the market, but it has also had an amazing level of development in the subsequent years. 
+
+Of course there are still some old school coders who will use EMACS or some other favourite text editor and sending their code to the console, but RStudio has really made a huge difference in how accessible R has become, and how familiar the working environment is to the average user. Because here is how R used to look like, this is the R console in its most basic format. And this is what it looks like now with RStudio. 
+So like R itself it is open source and free, it runs on the all the main operating systems. And it integrates the console and the text editor, but additionally also the plotting window, there is a data viewer as well, and a bunch of other tabs that allow you to view the folder tree, the project history, directly access help files and so on. So maybe lets just try having a look at what it looks like. 
+
+Additionally - and this is not directly relevant for the topic of reproducible research, but in a way it kind of is. And that is RStudio Server. The server essentially allows you to run R and Rstudio remotely. And access it via your browser. This only works on a linux machines, although of course you can also run it in virtual box on a windows machine. Anyway, the point is you can run R from your browser, which means from a laptop that doesn't have R installed, or on a tablet or whatever. And I've also seen it used in courses for example, like a seminar or workshop at a university where instead of installing R on a bunch of machines, the organizers can simply set up a single machine as the server and have all the participants access it though their browsers. So just to show you - because I'm not allowed to install stuff on this machine here, but I have r server running at home on my laptop, we can try to access it from here. Unless someone's broken in and stolen it that is. OK, so here we have it: 
+
+\section{git/Github}
+OK, so version control. Does anyone here use git or github? Yeah, it's not the most accessible of softwares, for sure. OK, so git is a "distributed version control system for software development. What this basically means is that it was developed by software developers, coders if you like, for software developers. The idea is that when you are writing code, stuff works to a point, and then you mess it up somehow and it can be tricky to get back to the previous state, when it was still working. And to complicate matters further, sometimes you are writing code with someone else, and they add something in their version, and you've added something to yours, and now you want to have both new features work in a new merged version, and you don't want to just be copy pasting stufff across, especially if it will break the code, and then you will have trouble again getting back to the working version from before. So like I said, this was written by developers for themselves and git is notorious for being pretty difficult to get a grip of. This xkcd comic exemplifies this attitude - it's a super cool system, but yeah, it gets complicated really quickly. Here is an example of a git diagram taken from an online tutorial. So yeah, it can be pretty tricky. 
+
+But, there is a but. git is fully integrated into RStudio, which means actually it is a lot a lot easier to use. You do not have to memorise any shell commands, you just need to add a simple new routine to your workflow, all from the comfort of this new RStudio tab over here. 
+
+So why is this relevant for reproducible research. Three reasons: one is for your own sake. This is an more elaborate way of keeping all of your work documented. So using version control means you can always revert back to any point in the process of your analysis. 
+Second reason is collaboration. Using version control makes it easier to have multiple people working on the same files, same datasets, same coding scripts, same manuscripts while ensuring everyone's contribution is properly recorded, the project files remain consistent and by providing a central platform for all of this to happen, including discussions of issues that might arise. 
+
+Even if you are not collaborating on a project, a github repository is an great tool for dissemination of projects. Simply 
+
+
+
+\end{document}
