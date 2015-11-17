@@ -1,0 +1,187 @@
+\documentclass{beamer}
+\usepackage{etex}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[vietnam,english]{babel}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{animate}
+\usepackage{ragged2e}
+\justifying
+\makeatother
+%next is meant to let you typeset text in r graphics?
+\usepackage{psfrag}
+\usepackage{pstricks,pst-node}
+%\usepackage{xkeyval}
+\usepackage{pst-3dplot}
+\usepackage{paralist} %for inline enumeration use begin{inparaenum}[(a)]
+\usepackage{upgreek}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{booktabs}
+\aboverulesep=0.7ex
+\belowrulesep=0.9ex
+\usepackage{dcolumn}
+%\usetheme[right]{Goettingen}
+\usetheme{Madrid}
+%\useoutertheme[]{sidebar}
+\useinnertheme{circles}
+\useoutertheme{default}
+%\setbeamercolor{fine separation line}{fg=black}
+\usepackage{textpos} % to add logo to header
+\usepackage[textfont={scriptsize}]{caption}
+\captionsetup{compatibility=false}
+%remove check if subtitle is empty
+\makeatletter
+\defbeamertemplate*{frametitle}{mydefault}[1][left]
+{
+  \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  \@tempdima=\textwidth%
+  \advance\@tempdima by\beamer@leftmargin%
+  \advance\@tempdima by\beamer@rightmargin%
+  \begin{beamercolorbox}[sep=0.3cm,#1,wd=\the\@tempdima]{frametitle}
+    \usebeamerfont{frametitle}%
+    \vbox{}\vskip-1ex%
+    \if@tempswa\else\csname beamer@fte#1\endcsname\fi%
+    \strut\insertframetitle\strut\par%
+    {%
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+    }%
+    \vskip-1ex%
+    \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+  \end{beamercolorbox}%
+}
+\makeatother
+
+
+
+%\usecolortheme{dove}
+\usefonttheme{structuresmallcapsserif}
+\usefonttheme{serif}
+%professionalfonts}
+\setbeamertemplate{navigation symbols}{} 
+\definecolor{myblue}{RGB}{54,100,139}
+\definecolor{myblue2}{RGB}{68,104,125}
+
+\setbeamercolor{title in head/foot}{fg=white, bg=myblue2}
+\setbeamercolor{frametitle}{fg=white, bg=myblue2}
+\setbeamercolor{title}{fg=white, bg=myblue2}
+\setbeamercolor{itemize item}{fg=myblue2}
+\setbeamercolor{itemize subitem}{fg=myblue2}
+
+\setbeamercolor{caption name}{fg=myblue2}
+
+\defbeamertemplate*{footline}{my footline}
+{
+    \ifnum \insertpagenumber=1
+      \leavevmode%
+      \hbox{%
+      \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,center]{}%
+        % empty environment to raise height
+      \end{beamercolorbox}}%
+      \vskip0pt%
+    \else
+      \leavevmode%
+      \hbox{%
+      \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+        \usebeamerfont{title in head/foot}\insertshorttitle
+      \end{beamercolorbox}}%
+      \vskip0pt%
+    \fi
+}
+
+\setbeamertemplate{footline}[my footline]
+
+\newcommand{\textoverline}[1]{$\overline{\mbox{#1}}$}
+%\usepackage[dvips]{graphicx}
+\DeclareGraphicsRule{*}{eps}{*}{}
+ \usepackage{pifont}
+\let\oldding\ding% Store old \ding in \oldding
+\renewcommand{\ding}[2][1]{\scalebox{#1}{\oldding{#2}}}
+
+%adds logo to header, needs textpos
+
+
+\title{Reproducible Research with R}
+\subtitle{Statistical Analysis with R using RStudio, GitHub, knitr and Shiny}
+\author{\textcolor{white}{dd}\\ \vspace{0.1cm} \footnotesize{\emph{Maja Zalo\v znik}}}
+\institute{	\includegraphics[height=0.7cm]{figures/ox_brand_cmyk_pos}
+	\hspace{0.001cm}
+	\includegraphics[height=0.7cm]{figures/oipa-big}}
+\date{\scriptsize{\textsc{Oxford} -- \scriptsize{$19^{th}$ March 2015}}
+ }
+ 
+\begin{document}
+
+\begin{frame}
+\vspace{2cm} 
+
+	\titlepage
+\end{frame}
+
+\section{Introduction}
+%\subsection{Outline}
+
+\begin{frame}{Outline}
+\begin{itemize}
+	\item \textbf<2>{Introduction}
+	\vspace{2ex}
+	\item \textbf<3>{Reproducibility}
+	\vspace{2ex}
+	\item \textbf<4>{RStudio}
+	\vspace{2ex}
+	\item \textbf<5>{GitHub}
+	\vspace{2ex}
+	\item \textbf<6>{knitr}
+	\vspace{2ex}
+	\item \textbf<7>{Shiny}
+\end{itemize}
+\end{frame}
+\section{Reproducibility}
+
+\begin{frame}{Reproducibility of Research}
+\begin{itemize}
+	\item<1-> \textbf<1>{Reproducibility vs Replicability of research?}
+	\vspace{2ex}
+	\item<2-> \emph{``The confirmation of results and conclusions from one study obtained independently in another'' } \small{(Jasny et al. 2011)}
+% reproducibility should in principle be always possible, whereas replicability may not be. 
+	\vspace{2ex}		
+	\item<3-> \emph{``[T]he independent verification of prior findings''} \small{(Santer et al. 2011)}
+	\item<4-> \textbf<4-8>{Levels of Replication}
+	\begin{enumerate}
+		\item<5-> 1. Re-ask the question
+		\item<6-> 2. Re-do the experiment
+		\item<7-> 3. Re-analyse the data 
+		\item<8-> 4.\textbf<9->{ Reproduce the analysis}
+	\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Reproducibility: Show your work!}
+%  \begin{columns}[T]
+    \begin{minipage}{.45\textwidth}
+\small{
+\vspace{0.5cm}
+
+\textbf{imgur} user \textbf{TVsJeff}: 
+\vspace{0.5cm}
+
+\emph{``A math teacher took points off for not showing all of my work. The next homework assignment i turned in looked like this. It was 45 pages long.''}}
+% Your text here
+    \end{minipage}\hfill
+    \begin{minipage}{.5\textwidth}
+% Your image included here
+\includegraphics[height=7.6cm]{figures/showyourwork}
+    \end{minipage}
+%  \end{columns}
+  
+\end{frame}
+
+\section{RStudio}
+\begin{frame}{RStudio}
+\begin{itemize}
+\item 
+\end{itemize}
+\end{frame}
+\end{document}
