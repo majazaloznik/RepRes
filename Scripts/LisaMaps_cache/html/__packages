@@ -1,0 +1,9 @@
+base
+sp
+Matrix
+spdep
+RColorBrewer
+classInt
+rgdal
+maptools
+dplyr
