@@ -1,0 +1,86 @@
+---
+output: html_document
+---
+
+# Big Title
+
+
+
+## Little Title
+
+
+
+### Even Littler Title
+
+
+Normal text, just perfectly normal text, nothing special here.
+If we want to jazz it up a bit we can use *italics* for example, or even **bold** text!
+
+Making a list of other things we can do:  
+
+*  write equations such as $$ e = m c^2 $$
+*  add url links: [click here](http://www.google.com)
+*  do numbered lists - that are indented further
+    1. like
+    2. this
+    
+And tables are quite straightforward as well:
+
+
+First Header  | Second Header | Third Header
+------------- | ------------- | ------------
+Content Cell  | Content Cell  |  More stuff
+
+
+
+## OK, now for some data analysis
+
+First let's get some data, one of the builtin datasets will do, iris sepal lentgh is a favourite.
+
+From the documentation: 
+> Fisher's or Anderson's iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are *Iris setosa*, *versicolor*, and *virginica*.
+
+Here is a quick look at the data set, to give you a flavour: 
+
+```{r}
+head(iris)
+
+```
+
+Just quickly, there are is `r nrow(iris)` cases or rows in the dataset, and the mean petal lenght is 
+`r mean(iris$Petal.Length)`. 
+
+
+### Simple scatterplot
+
+Now we can explore the data visually a bit, like plotting the petal length by its width:
+```{r}
+plot(iris$Petal.Length, iris$Petal.Width, 
+     xlab=c("Petal lenght"),
+     ylab=c("Petal width"),
+     main="Iris Data")
+
+```
+
+### Linear regression
+
+How about a linear regression line in the chart? And colour coding the data points by species?
+First let's use a linear model  and see what the intercept and slope are?
+
+```{r}
+lm(iris$Petal.Width ~ iris$Petal.Length )$coefficients
+```
+
+OK, not we can do the same plot as before, but add colours and the line. And because this is pretty straightforward, I won't bore you with the code, but only show you the plot instead:
+
+```{r, echo=FALSE}
+plot(iris$Petal.Length, iris$Petal.Width, 
+     col=c("red","green","blue")[unclass(iris$Species)],
+     xlab=c("Petal lenght"),
+     ylab=c("Petal width"),
+     main="Iris Data")
+abline(lm(iris$Petal.Width ~ iris$Petal.Length )$coefficients, col="black")
+
+```
+
+### More to come...

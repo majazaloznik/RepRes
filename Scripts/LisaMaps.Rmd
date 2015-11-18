@@ -1,9 +1,8 @@
 ---
 title: "LisaMaps"
 author: "maja založnik"
+output: pdf_document
 font-family: serif
-output: html_document
-
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(cache=TRUE)
