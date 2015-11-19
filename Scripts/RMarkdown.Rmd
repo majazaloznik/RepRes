@@ -1,5 +1,5 @@
 ---
-output: html_document
+output: pdf_document
 ---
 
 # Big Title
@@ -54,6 +54,7 @@ Just quickly, there are is `r nrow(iris)` cases or rows in the dataset, and the 
 ### Simple scatterplot
 
 Now we can explore the data visually a bit, like plotting the petal length by its width:
+
 ```{r}
 plot(iris$Petal.Length, iris$Petal.Width, 
      xlab=c("Petal lenght"),
